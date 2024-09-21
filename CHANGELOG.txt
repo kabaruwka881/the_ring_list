@@ -14,4 +14,8 @@ delete_after_by_value()
 
 CHANGELOG 23.09.2024
 added a panel for user interaction
-added the last function (list_intersection)x
+added the last function (list_intersection)
+
+CHANGELOG 11.11.2011
+bug fixes
+added input verification
