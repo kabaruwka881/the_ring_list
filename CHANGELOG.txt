@@ -5,3 +5,9 @@ push_back()
 count_list()
 print_list()
 delete_list()
+
+CHANGELOG 21.09.2024
+Added some important functions for the list:
+search_list()
+delete_by_value()
+delete_after_by_value()
