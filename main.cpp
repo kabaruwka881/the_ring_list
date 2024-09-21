@@ -167,6 +167,14 @@ void list_intersection(Node* head1, Node* head2) {
     }
 }
 
+bool error_cin_processing(int word) {
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(20, '\n');
+        return false;
+    }
+    return true;
+}
 
 int main() {
     Node* head = nullptr; string stop_word; int word;
@@ -177,8 +185,10 @@ int main() {
                 "Press '4' to search the necessary element of the list\n"
                 "Press '5' to delete all elements which you'll write\n"
                 "Press '6' to delete all elements after the specified element\n"
-                "Press '7' to make intersection of 2 lists\n";
-    while (cout << "What's your choice? Press here: " && cin >> word) {
+                "Press '7' to make intersection of 2 lists\n"
+                "To exit from the program press '-1'" << endl;
+    while (word != -1 && cout << "What's your choice? Press here: ") {
+        cin >> word;
         switch (word) {
             case 1: {
                 cout << "Enter an element of your list: ";
@@ -223,21 +233,22 @@ int main() {
                 break;
             }
             case 7: {
-                cout << "Enter elements for the second list [for stop press -1]: ";
-                while (true) {
-                    cin >> word;
-                    if (word == -1)
-                        break;
+                cout << "Enter elements for the second list [for stop type any string symbol]: ";
+                while (cin >> word && word != -1) {
                     push_back(head2, word);
                 }
+                error_cin_processing(word);
                 cout << "Your result of intersection: ";
                 list_intersection(head, head2);
                 cout << endl;
                 break;
             }
+            case -1:
+                cout << "The program is closing..." << endl;
+                break;
             default: {
-                cout << endl;
-                cout << "Invalid argument (choice isn't integer)";
+                error_cin_processing(word);
+                cout << "Invalid int argument. Try again." << endl;
                 break;
             }
         }
