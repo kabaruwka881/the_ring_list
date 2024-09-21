@@ -1,0 +1,7 @@
+CHANGELOG 21.09.2024
+Added some important functions for the list:
+create_list()
+push_back()
+count_list()
+print_list()
+delete_list()
