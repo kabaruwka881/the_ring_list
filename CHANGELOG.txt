@@ -11,3 +11,7 @@ Added some important functions for the list:
 search_list()
 delete_by_value()
 delete_after_by_value()
+
+CHANGELOG 23.09.2024
+added a panel for user interaction
+added the last function (list_intersection)x
