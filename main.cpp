@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 
 using namespace std;
 
@@ -153,24 +154,29 @@ void list_intersection(Node* head1, Node* head2) {
     if (!head1 || !head2) {
         return;
     }
-    int count_1 = count_list(head1); int count_2 = count_list(head2);
-    Node* temp_1 = head1;
+    set<int> intersection;
+    const int count_1 = count_list(head1);
+    const int count_2 = count_list(head2);
+    const Node* temp_1 = head1;
     for (int i = 0; i < count_1; i++) {
-        Node* temp_2 = head2;
+        const Node* temp_2 = head2;
         for (int j = 0; j < count_2; j++) {
             if (temp_1->data == temp_2->data) {
-                cout << temp_1->data << " ";
+                intersection.insert(temp_1->data);
             }
             temp_2 = temp_2->next;
         }
         temp_1 = temp_1->next;
+    }
+    for (const auto& c : intersection) {
+        cout << c << " ";
     }
 }
 
 bool error_cin_processing(int word) {
     if (cin.fail()) {
         cin.clear();
-        cin.ignore(20, '\n');
+        cin.ignore(100, '\n');
         return false;
     }
     return true;
@@ -249,6 +255,7 @@ int main() {
             default: {
                 error_cin_processing(word);
                 cout << "Invalid int argument. Try again." << endl;
+                cout << endl;
                 break;
             }
         }
