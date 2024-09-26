@@ -183,8 +183,8 @@ bool error_cin_processing(int word) {
 }
 
 int main() {
-    Node* head = nullptr; string stop_word; int word;
-    Node* head1 = nullptr; Node* head2 = nullptr;
+    Node* head = nullptr; int word;
+    Node* head2 = nullptr;
     cout << "Press '1' add an element to the list in the end\n"
                 "Press '2' to print all list\n"
                 "Press '3' to delete all list\n"
