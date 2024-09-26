@@ -115,7 +115,11 @@ void delete_by_value(Node*& head, const int key) {
         delete prev;
         count--;
     }
-    head = temp;
+    if (count == 0) {
+        head = nullptr;
+        return;
+    }
+        head = temp;
     for (int i = 1; i < count; i++) {
         if (temp->next->data == key) {
             prev = temp->next;
@@ -135,16 +139,20 @@ void delete_after_by_value(Node*& head, const int key) {
     Node* temp = head->next;
     Node* prev = head;
     int count = count_list(head);
-    for (int i = 1; i < count; i++) {
+    for (int i = 0; i < count; i++) {
         if (prev->data == key) {
+            if (temp == head) {
+                Node* test = temp->next;
+                delete temp;
+                head = test;
+                prev->next = head;
+                return;
+            }
             prev->next = temp->next;
             delete temp;
             count--;
         }
         prev = prev->next;
-        if (prev->next == head) {
-            break;
-        }
         temp = prev->next;
     }
 }
@@ -173,7 +181,29 @@ void list_intersection(Node* head1, Node* head2) {
     }
 }
 
-bool error_cin_processing(int word) {
+void unique_elements(Node* head, Node* head2) {
+    if (head == nullptr) {
+        return;
+    }
+    Node* temp = head;
+    Node* curr = head;
+    for (int i = 0; i < count_list(head); i++) {
+        int count = 0;
+        for (int j = 0; j < count_list(temp); j++) {
+            if (curr->data == temp->data) {
+                count++;
+            }
+            temp = temp->next;
+        }
+        if (count == 1) {
+            push_back(head2, curr->data);
+        }
+        curr = curr->next;
+    }
+    print_list(head2);
+}
+
+bool error_cin_processing() {
     if (cin.fail()) {
         cin.clear();
         cin.ignore(100, '\n');
@@ -192,6 +222,7 @@ int main() {
                 "Press '5' to delete all elements which you'll write\n"
                 "Press '6' to delete all elements after the specified element\n"
                 "Press '7' to make intersection of 2 lists\n"
+                "Press '8' to create a new list with unique elements\n"
                 "To exit from the program press '-1'" << endl;
     while (word != -1 && cout << "What's your choice? Press here: ") {
         cin >> word;
@@ -243,9 +274,15 @@ int main() {
                 while (cin >> word && word != -1) {
                     push_back(head2, word);
                 }
-                error_cin_processing(word);
+                error_cin_processing();
                 cout << "Your result of intersection: ";
                 list_intersection(head, head2);
+                cout << endl;
+                break;
+            }
+            case 8: {
+                cout << "Your a new unique list: ";
+                unique_elements(head, head2);
                 cout << endl;
                 break;
             }
@@ -254,7 +291,7 @@ int main() {
                 break;
             default: {
                 cout << endl;
-                error_cin_processing(word);
+                error_cin_processing();
                 cout << "Invalid int argument. Try again." << endl;
                 cout << endl;
                 break;
