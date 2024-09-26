@@ -7,19 +7,19 @@ struct Node {
     int data;
     Node* next;
 
-    Node(int data, Node* next) {
+    Node(const int data, Node* next) {
         this->data = data;
         this->next = next;
     }
 };
 
-Node* create_list(int data) {
+Node* create_list(const int data) {
     Node* newNode = new Node(data, nullptr);
     newNode->next = newNode;
     return newNode;
 }
 
-void push_back(Node*& head, int data) {
+void push_back(Node*& head, const int data) {
     if (head == nullptr) {
         head = create_list(data);
     } else {
@@ -97,7 +97,7 @@ bool search_list(Node* head, int key) {
     return false;
 }
 
-void delete_by_value(Node*& head, int key) {
+void delete_by_value(Node*& head, const int key) {
     if (head == nullptr) {
         return;
     }
@@ -128,7 +128,7 @@ void delete_by_value(Node*& head, int key) {
     temp->next = head;
 }
 
-void delete_after_by_value(Node*& head, int key) {
+void delete_after_by_value(Node*& head, const int key) {
     if (head == nullptr || head->next == head) {
         return;
     }
@@ -253,6 +253,7 @@ int main() {
                 cout << "The program is closing..." << endl;
                 break;
             default: {
+                cout << endl;
                 error_cin_processing(word);
                 cout << "Invalid int argument. Try again." << endl;
                 cout << endl;
